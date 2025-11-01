@@ -1,3 +1,19 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js"
+import { getDatabase,
+         push,
+         onValue,
+         ref,
+         remove
+        } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js"
+const firebaseConfig = {
+    databaseURL: "https://leads-tracker-app-72970-default-rtdb.europe-west1.firebasedatabase.app/"
+}
+const app = initializeApp(firebaseConfig)
+const database = getDatabase(app)
+const referenceInDb = ref(database, "leads")
+
+console.log(app)
+
 let myLeads = []
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
@@ -33,6 +49,9 @@ function render(leads) {
     ulEl.innerHTML = listItems
 }
 
+onValue(referenceInDb, function(snapshot) {
+
+})
 deleteBtn.addEventListener("dblclick", function() {
     localStorage.clear()
     myLeads = []
